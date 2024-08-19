@@ -1,0 +1,115 @@
+:root {
+  --bg-main: rgba(235, 235, 235, 1);
+  --bg-white: white;
+  --border-color: rgba(189, 189, 189, 1);
+
+  --accent-color: rgba(132, 159, 255, 1);
+}
+body {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap:30px;
+  height: 100dvh;
+  background: var(--bg-main);
+}
+.writer-window {
+  width: 215px;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: space-between;
+  gap: 10px;
+  background: var(--bg-white);
+  padding: 10px;
+  border-radius: 4px;
+}
+.title {
+  margin: 0;
+}
+input{
+  outline: none;
+  border-radius: 4px;
+  border:none;
+}
+.main-input {
+  max-width: 80%;
+  height: 65px;
+  border: var(--border-color) 1px solid;
+  text-align: start;
+  vertical-align: top;
+  background: var(--bg-main);
+}
+.buttons-row {
+  width: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  gap: 10px;
+}
+button {
+  outline: none;
+  border: none;
+  padding: 8px 12px;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 14.06px;
+  text-align: left;
+  border-radius: 4px;
+}
+.add-button {
+  background-color: var(--accent-color);
+}
+.cancel-button {
+    background-color: var(--bg-main);
+}
+
+.reader-window {
+  width: 215px;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  gap:10px;
+  background: var(--bg-white);
+  border-radius: 4px;
+  padding: 10px;
+}
+.task-Block {
+  max-height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: var(--bg-main) 2px solid ;
+}
+.inputs-sectoin{
+  display: flex;
+  justify-content: space-between;
+}
+.task-text{
+  background-color: var(--bg-main);
+  text-align:center;
+}
+.buttons-section{
+  display: flex;
+  justify-content: space-between;
+}
+.edit-button {
+  background-color: greenyellow;
+}
+.delete-button {
+  background-color: rgb(239, 140, 140);
+}
+
+.no-task{
+  color: rgb(42, 42, 42);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
