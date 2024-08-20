@@ -3,6 +3,8 @@ const addButton = document.querySelector(".add-button");
 const cancelButton = document.querySelector(".cancel-button");
 const readerWindow = document.querySelector(".reader-window");
 
+let counter = 1;
+
 var notion = document.createElement("div");
 notion.textContent = "No tasks yet";
 notion.className = "no-task";
@@ -12,7 +14,16 @@ function notionAppend(){
         readerWindow.append(notion);
       }
 }
-notionAppend();
+
+if(localStorage.getItem("Todo") != undefined){
+  let list =  [...JSON.parse(localStorage.getItem("Todo"))]
+  for(let i = 0; i < list.length; i++){
+    newTask(list[i].task);
+  }
+}
+else{
+  notionAppend();
+}
 
 addButton.addEventListener("click", () => {
   let taskInfo = mainInput.value;
@@ -20,6 +31,7 @@ addButton.addEventListener("click", () => {
     notion.remove();
   }
   newTask(taskInfo);
+  LSInputter(taskInfo);
   mainInput.value = "";
 });
 
@@ -29,9 +41,11 @@ cancelButton.addEventListener("click", () => {
     }
     else{
         while(readerWindow.children[0] != notion){
-            readerWindow.removeChild(readerWindow.firstChild);
-            notionAppend();
+          readerWindow.removeChild(readerWindow.firstChild);
+          localStorage.clear();
+          notionAppend();
         }
+        counter = 1; 
     }
 })
 
@@ -81,7 +95,16 @@ function newTask(someTask) {
 
   dButton.addEventListener("click", () => {
     if(confirm("are you sure you want to delete this note?")){
-        taskBlock.remove();
+        
+      let CurrentId = parseInt(taskBlock.getAttribute("id"));
+      let db = JSON.parse(localStorage.getItem("Todo"))
+      let newDb = db.filter(element => {
+        if(element.id != CurrentId){
+          return element;
+        }
+      })
+      localStorage.setItem("Todo",JSON.stringify(newDb))
+      taskBlock.remove();
         notionAppend();
     }
   })
@@ -96,5 +119,16 @@ function newTask(someTask) {
   taskBlock.className = "task-Block";
   taskBlock.append(iSection);
   taskBlock.append(bSection);
+  taskBlock.setAttribute("id",`${counter}`);
   readerWindow.append(taskBlock);
+}
+function LSInputter(someTask){
+  if(localStorage.getItem("Todo") != undefined){
+    localStorage.setItem("Todo",JSON.stringify([...JSON.parse(localStorage.getItem("Todo")),{id:counter,task:someTask}]))
+    counter++;
+  }
+  else{
+    localStorage.setItem("Todo",JSON.stringify([{id:counter,task:someTask}]))
+    counter++;
+  }
 }
